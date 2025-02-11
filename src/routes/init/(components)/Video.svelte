@@ -31,7 +31,7 @@
         >
             <path
                 d="M15.9565 9.11814L-0.000196062 18.2363L-0.000195265 -6.97491e-07L15.9565 9.11814Z"
-                fill="#EDEDF0"
+                fill="#000000"
             />
         </svg>
     </div>
@@ -47,6 +47,7 @@
         position: relative;
         overflow: hidden;
         max-height: 100%;
+        height: 100%;
 
         display: flex;
         justify-content: flex-end;
@@ -57,8 +58,10 @@
 
     .img {
         border-radius: var(--p-border-radius, 0.5rem);
-        object-fit: cover;
+        aspect-ratio: var(--p-aspect-ratio, 1.6);
         inline-size: 100%;
+        filter: grayscale(1);
+        height: 100%;
     }
 
     .play {

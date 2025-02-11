@@ -97,7 +97,7 @@
             label: 'Tooling',
             items: [
                 {
-                    label: 'Command Line',
+                    label: 'CLI',
                     href: '/docs/tooling/command-line/installation',
                     icon: 'icon-terminal',
                     isParent: true
@@ -111,6 +111,11 @@
                     label: 'Assistant',
                     href: '/docs/tooling/assistant',
                     icon: 'icon-sparkles'
+                },
+                {
+                    label: 'The Appwriter',
+                    href: '/docs/tooling/appwriter',
+                    icon: 'icon-text'
                 }
             ]
         },
@@ -122,6 +127,13 @@
                     href: '/docs/advanced/platform',
                     icon: 'web-icon-platform',
                     isParent: true
+                },
+                {
+                    label: 'Integrations',
+                    href: '/integrations',
+                    icon: 'icon-puzzle',
+                    isParent: true,
+                    openInNewTab: true
                 },
                 {
                     label: 'Migrations',

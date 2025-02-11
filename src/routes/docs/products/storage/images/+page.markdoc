@@ -39,7 +39,7 @@ Below you can find all the different parameters offered by the preview endpoint 
 # Examples {% #examples %}
 Here are some examples using [Client SDKs](/docs/sdks#client).
 {% multicode %}
-```js
+```client-web
 import { Client, Storage } from "appwrite";
 
 const client = new Client();
@@ -48,7 +48,7 @@ const storage = new Storage(client);
 
 client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
+    .setProject('<PROJECT_ID>') // Your project ID
 ;
 
 const result = storage.getFilePreview(
@@ -69,7 +69,7 @@ const result = storage.getFilePreview(
 
 console.log(result.href);
 ```
-```dart
+```client-flutter
 import 'package:appwrite/appwrite.dart';
 
 void main() { // Init SDK
@@ -78,7 +78,7 @@ void main() { // Init SDK
 
   client
     .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2') // Your project ID
+    .setProject('<PROJECT_ID>') // Your project ID
   ;
   // downloading file
   Future result = storage.getFilePreview(
@@ -118,13 +118,13 @@ FutureBuilder(
   },
 );
 ```
-```swift
+```client-apple
 import Appwrite
 
 func main() async throws {
     let client = Client()
       .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-      .setProject("5df5acd0d48c2") // Your project ID
+      .setProject("<PROJECT_ID>") // Your project ID
     let storage = Storage(client)
     let byteBuffer = try await storage.getFilePreview(
             bucketId: "photos",         // bucket ID
@@ -145,7 +145,7 @@ func main() async throws {
     print(String(describing: byteBuffer)
 }
 ```
-```kotlin
+```client-android-java
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.coroutines.GlobalScope
@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 
         val client = Client(applicationContext)
             .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-            .setProject("5df5acd0d48c2") // Your project ID
+            .setProject("<PROJECT_ID>") // Your project ID
 
         val storage = Storage(client)
 

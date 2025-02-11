@@ -1,29 +1,20 @@
+import { sentrySvelteKit } from '@sentry/sveltekit';
 import dynamicImport from 'vite-plugin-dynamic-import';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { enhancedImages } from '@sveltejs/enhanced-img';
-import type { Plugin } from 'vite';
-
-const envFixer: Plugin = {
-    name: 'env-fixer',
-    enforce: 'pre',
-    transform(code, id) {
-        if (!id.includes('.markdoc')) {
-            return { code };
-        }
-
-        // The replacement uses a zero-width space to avoid being detected by vite
-        const transformed = code.replaceAll(/process\.env/g, 'process​.env');
-        return {
-            code: transformed
-        };
-    }
-};
+import manifestSRI from 'vite-plugin-manifest-sri';
 
 export default defineConfig({
     plugins: [
-        envFixer,
+        sentrySvelteKit({
+            adapter: 'node',
+            sourceMapsUploadOptions: {
+                org: 'appwrite',
+                project: 'website'
+            }
+        }),
         enhancedImages(),
         sveltekit(),
         dynamicImport({
@@ -34,9 +25,27 @@ export default defineConfig({
             }
         }),
         ViteImageOptimizer({
-            includePublic: true
+            include: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg'],
+            exclude: ['**/*.avif', '**/*.webp'],
+            cache: true,
+            cacheLocation: '.cache'
+        }),
+        manifestSRI({
+            algorithms: ['sha384']
         })
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern'
+            }
+        },
+        devSourcemap: process.env.NODE_ENV !== 'production'
+    },
+    build: {
+        sourcemap: process.env.NODE_ENV !== 'production',
+        reportCompressedSize: false
+    },
     test: {
         include: ['src/**/*.{test,spec}.{js,ts}']
     }

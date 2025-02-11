@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Environment variables
-description: Customize the behavior of your self-hosted Appwrite instance to your unique needs. Customize SMTP, sms, functions, S3 adaptor, database, and other behaiors.
+description: Customize the behavior of your self-hosted Appwrite instance to your unique needs. Customize SMTP, SMS, functions, S3 adaptor, database, and other behaiors.
 ---
 
 
@@ -39,7 +39,7 @@ docker compose exec appwrite vars
 | `_APP_SYSTEM_SECURITY_EMAIL_ADDRESS` | This is the email address used to issue SSL certificates for custom domains or the user agent in your webhooks payload. |
 | `_APP_USAGE_STATS` | This variable allows you to disable the collection and displaying of usage stats. This value is set to 'enabled' by default, to disable the usage stats set the value to 'disabled'. When disabled, it's recommended to turn off the Worker Usage container to reduce resource usage. |
 | `_APP_LOGGING_PROVIDER` |  **(version >= 0.12.0)** This variable allows you to enable logging errors to 3rd party providers. This value is empty by default, set the value to one of 'sentry', 'raygun', 'appSignal', 'logOwl' to enable the logger. |
-| `_APP_LOGGING_CONFIG`  | **(version >= 0.12.0)** This variable configures authentication to 3rd party error logging providers. If using Sentry, this should be 'SENTRY_API_KEY;SENTRY_APP_ID'. If using Raygun, this should be Raygun API key. If using AppSignal, this should be AppSignal API key. If using LogOwl, this should be LogOwl Service Ticket. |
+| `_APP_LOGGING_CONFIG`  | **(version >= 0.12.0)** This variable configures authentication to 3rd party error logging providers. If using Sentry, this should be 'SENTRY_PROJECT_ID;SENTRY_PUBLIC_KEY@SENTRY_HOST'. If using Raygun, this should be Raygun API key. If using AppSignal, this should be AppSignal API key. If using LogOwl, this should be LogOwl Service Ticket. |
 | `_APP_USAGE_AGGREGATION_INTERVAL` | **(version >= 1.1.0)** Interval value containing the number of seconds that the Appwrite usage process should wait before aggregating stats and syncing it to Database from TimeSeries data. The default value is 30 seconds. Reintroduced in 1.1.0. |
 | `_APP_USAGE_TIMESERIES_INTERVAL` | **(version >= 1.0.0)** Deprecated since 1.1.0 use _APP_USAGE_AGGREGATION_INTERVAL instead. |
 | `_APP_USAGE_DATABASE_INTERVAL` |  **(version >= 1.0.0)** Deprecated since 1.1.0 use _APP_USAGE_AGGREGATION_INTERVAL instead. |
@@ -67,25 +67,7 @@ Appwrite uses MariaDB to persist database data. The DB env vars are used to allo
 | `_APP_DB_SCHEMA`       | MariaDB server database schema. Default value is: `appwrite`.                                    |
 | `_APP_DB_USER`         | MariaDB server user name. Default value is: `user`.                                              |
 | `_APP_DB_PASS`         | MariaDB server user password. Default value is: `password`.                                      |
-| `_APP_DB_ROOT_PASS`    | MariaDB server root password. Default value is: `rootsecretpassword`.                           |
-
-# InfluxDB {% #influxdb %}
-Appwrite uses an InfluxDB server for managing time-series data and server stats. The InfluxDB env vars are used to allow Appwrite server to connect to the InfluxDB container.
-
-| Name                  | Description                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| `_APP_INFLUXDB_HOST`  | InfluxDB server host name address. Default value is: `influxdb`.                                |
-| `_APP_INFLUXDB_PORT`  | InfluxDB server TCP port. Default value is: `8086`.                                             |
-
-
-# StatsD {% #statsd %}
-
-Appwrite uses a StatsD server for aggregating and sending stats data over a fast UDP connection. The StatsD env vars are used to allow Appwrite server to connect to the StatsD container.
-
-| Name                | Description                                                                         |
-|---------------------|-------------------------------------------------------------------------------------|
-| `_APP_STATSD_HOST`  | StatsD server host name address. Default value is: `telegraf`.                      |
-| `_APP_STATSD_PORT`  | StatsD server TCP port. Default value is: `8125`.                                   |
+| `_APP_DB_ROOT_PASS`    | MariaDB server root password. Default value is: `rootsecretpassword`.                           |                              |
 
 
 # SMTP {% #smtp %}

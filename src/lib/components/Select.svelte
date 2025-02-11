@@ -26,6 +26,8 @@
         change: unknown;
     }>();
 
+    export let initialLabel: string = 'Select an option';
+
     const {
         elements: { trigger, menu, option: optionEl, group: groupEl, groupLabel },
         states: { open, selected, selectedLabel }
@@ -70,7 +72,10 @@
             return carry;
         }, {});
 
-        return Object.entries(groups).map(([label, options]) => ({ label, options }));
+        return Object.entries(groups).map(([label, options]) => ({
+            label,
+            options
+        }));
     })();
 
     $: flyParams = {
@@ -90,7 +95,7 @@
         {#if selectedOption?.icon}
             <span class={selectedOption.icon} aria-hidden="true" />
         {/if}
-        <span>{$selectedLabel}</span>
+        <span>{$selectedLabel || initialLabel}</span>
     </div>
     <span class="icon-cheveron-{$open ? 'up' : 'down'}" aria-hidden="true" />
 </button>
@@ -106,13 +111,13 @@
         {#each groups as group}
             {@const isDefault = group.label === DEFAULT_GROUP}
             {#if isDefault}
-                <div class="u-flex u-flex-vertical u-gap-2">
+                <div class="flex flex-col gap-0.5">
                     {#each group.options as option}
                         <button class="web-select-option" use:melt={$optionEl(option)}>
                             {#if option.icon}
                                 <span class={option.icon} aria-hidden="true" />
                             {/if}
-                            <span style:text-transform="capitalize">{option.label}</span>
+                            <span>{option.label}</span>
                         </button>
                     {/each}
                 </div>
